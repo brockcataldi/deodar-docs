@@ -85,6 +85,18 @@ public string $url_blocks_dir = '';
 ```
 The URL path of `/blocks/`.
 
+#### `$configured`
+```php
+public bool $configured = false;
+```
+Whether or not the source is bound and configured.
+
+#### `$production`
+```php
+public bool $production = false;
+```
+Whether or not the source is in production mode (affects caching).
+
 #### `$menus`
 ```php
 public array $menus = array();
@@ -111,23 +123,53 @@ Array of `Deodar_Support` objects bound to the source.
 
 ### Private Properties
 
+#### `$transient_acf_blocks`
+```php
+private string $transient_acf_blocks = 'deodar_paths_acf_blocks';
+```
+The transient name for the ACF block paths.
+
+#### `$transient_walkers`
+```php
+private string $transient_walkers = 'deodar_paths_walkers';
+```
+The transient name for the walker paths.
+
+#### `$transient_customizations`
+```php
+private string $transient_customizations = 'deodar_paths_customizations';
+```
+The transient name for the customization paths.
+
+#### `$transient_styles_blocks`
+```php
+private string $transient_styles_blocks = 'deodar_styles_blocks';
+```
+The transient name for the block styles.
+
 #### `$paths_acf_blocks`
 ```php
 private null|array $paths_acf_blocks = null;
 ```
 Cached ACF block paths.
 
+#### `$paths_walkers`
+```php
+private null|array $paths_walkers = null;
+```
+Cached walker paths.
+
+#### `$paths_customizations`
+```php
+private null|array $paths_customizations = null;
+```
+Cached customization paths.
+
 #### `$styles_blocks`
 ```php
 private null|array $styles_blocks = null;
 ```
 Cached block styles.
-
-#### `$includes`
-```php
-private array $includes = array();
-```
-Cache of loaded includes.
 
 ## Methods
 
@@ -140,7 +182,7 @@ public function __construct()
 **Since:** 2.0.0  
 **Returns:** void  
 
-Empty constructor meant to be overridden by child classes.
+Empty constructor meant to be empty, as it's not needed.
 
 ### Public Methods
 
@@ -156,6 +198,7 @@ Binds all necessary WordPress hooks and filters:
 - `acf/json/save_file_name` - Custom ACF JSON file naming
 - `acf/json/save_paths` - ACF JSON save path configuration
 - `acf/settings/load_json` - ACF JSON loading paths
+- `get_block_type_variations` - Block variations support
 - `admin_enqueue_scripts` - Admin script/style enqueuing
 - `after_setup_theme` - Theme setup and configuration
 - `customize_register` - WordPress customizer registration
@@ -269,7 +312,31 @@ public function wp_enqueue_scripts()
 
 Enqueues all registered styles and scripts for the frontend.
 
+#### `get_block_type_variations($variations, $block_type)`
+```php
+public function get_block_type_variations($variations, $block_type)
+```
+**Since:** 2.0.0  
+**Parameters:**
+- `array $variations` - The variations
+- `array $block_type` - The block type
+
+**Returns:** array - The variations
+
+**Hook:** `get_block_type_variations`
+
+Handles block variations support by loading variation files for registered blocks.
+
 ### Private Methods
+
+#### `configure_if_not_configured()`
+```php
+private function configure_if_not_configured(): void
+```
+**Since:** 2.0.0  
+**Returns:** void  
+
+Configures the source if not already configured by applying the `deodar` filter.
 
 #### `configure($data)`
 ```php
@@ -308,57 +375,30 @@ Returns all directories in the `/blocks/acf/` path, cached for performance.
 
 #### `get_block_styles()`
 ```php
-private function get_block_styles()
+private function get_block_styles(): array
 ```
 **Since:** 2.0.0  
 **Returns:** array - Array of `Deodar_Block_Style` objects
 
 Creates and caches `Deodar_Block_Style` objects for all discovered blocks.
 
-#### `load_includes($type, $pattern)`
-```php
-private function load_includes(string $type, string $pattern)
-```
-**Since:** 2.0.0  
-**Parameters:**
-- `string $type` - The type and folder of the includes
-- `string $pattern` - The file regex to match against
-
-**Returns:** void  
-
-Dynamically loads PHP files within a type matching a pattern (e.g., walkers).
-
-#### `get_deodar_includes($type, $pattern, $suffix)`
-```php
-private function get_deodar_includes(string $type, string $pattern, string $suffix): array
-```
-**Since:** 2.0.0  
-**Parameters:**
-- `string $type` - The type and folder of the includes
-- `string $pattern` - The file regex to match against
-- `string $suffix` - The end of the classname that's enforced
-
-**Returns:** array - Array of loaded includes
-
-Loads and caches Deodar abstract classes within the includes folder.
-
-#### `load_walkers()`
-```php
-private function load_walkers(): void
-```
-**Since:** 2.0.0  
-**Returns:** void  
-
-Loads all walkers within the walkers folder.
-
 #### `get_customizations()`
 ```php
-private function get_customizations()
+private function get_customizations(): array
 ```
 **Since:** 2.0.0  
 **Returns:** array - Array of loaded customizations
 
-Loads and returns all Customization classes.
+Loads and caches customizations within the includes/customizations folder.
+
+#### `get_walkers()`
+```php
+private function get_walkers(): array
+```
+**Since:** 2.0.0  
+**Returns:** array - Array of loaded walkers
+
+Returns all of the walkers within the walkers folder.
 
 ## Usage Example
 
@@ -377,19 +417,39 @@ add_filter('deodar', function($data) {
     return [
         'path' => get_template_directory(),
         'url' => get_template_directory_uri(),
+        'production' => true, // Enable caching in production
         'menus' => [
             'primary' => 'Primary Menu',
             'footer' => 'Footer Menu'
         ],
         'styles' => [
-            ['handle' => 'main-style', 'file' => '/css/main.css']
+            [
+                'handle' => 'main-style', 
+                'file' => '/css/main.css',
+                'dependencies' => [],
+                'version' => '1.0.0',
+                'media' => 'all',
+                'frontend' => true,
+                'backend' => false
+            ]
         ],
         'scripts' => [
-            ['handle' => 'main-script', 'file' => '/js/main.js']
+            [
+                'handle' => 'main-script', 
+                'file' => '/js/main.js',
+                'dependencies' => ['jquery'],
+                'version' => '1.0.0',
+                'args' => true, // Load in footer
+                'frontend' => true,
+                'backend' => false
+            ]
         ],
         'supports' => [
             'post-thumbnails',
-            ['feature' => 'custom-logo', 'args' => ['height' => 100, 'width' => 100]]
+            [
+                'feature' => 'custom-logo', 
+                'args' => ['height' => 100, 'width' => 100]
+            ]
         ]
     ];
 });

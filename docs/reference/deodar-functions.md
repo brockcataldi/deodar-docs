@@ -213,6 +213,59 @@ _deodar_get_type_from_key('field_taxonomy_456');   // Returns 'field_taxonomy'
 _deodar_get_type_from_key('simple_key');           // Returns null
 ```
 
+### `_deodar_safe_include()`
+
+```php
+function _deodar_safe_include(string $path): bool
+```
+
+**Since:** 2.0.0  
+**Parameters:**
+- `string $path` - The path to the file
+
+**Returns:** `bool` - True if the file was included, false otherwise
+
+**Description:** Safely include a file with error handling. Checks if the file exists and is readable before including it.
+
+**Example:**
+```php
+$result = _deodar_safe_include('/path/to/file.php');
+if ($result) {
+    // File was successfully included
+} else {
+    // File could not be included (doesn't exist, not readable, or error occurred)
+}
+```
+
+### `_deodar_2d_array_search()`
+
+```php
+function _deodar_2d_array_search(array $data_array, int|string $key, mixed $value): int|false
+```
+
+**Since:** 2.0.0  
+**Parameters:**
+- `array $data_array` - The array to search
+- `int|string $key` - The key to search for
+- `mixed $value` - The value to search for
+
+**Returns:** `int|false` - The key of the value or false if not found
+
+**Description:** Search for a key/value pair in a 2D array. Returns the index of the first matching item.
+
+**Example:**
+```php
+$data = [
+    ['name' => 'John', 'age' => 30],
+    ['name' => 'Jane', 'age' => 25],
+    ['name' => 'Bob', 'age' => 35]
+];
+
+$index = _deodar_2d_array_search($data, 'name', 'Jane');  // Returns 1
+$index = _deodar_2d_array_search($data, 'age', 30);       // Returns 0
+$index = _deodar_2d_array_search($data, 'name', 'Alice'); // Returns false
+```
+
 ## Usage Examples
 
 ### Array Type Checking
@@ -267,6 +320,6 @@ switch ($type) {
 
 ## Related Files
 
-- `lib/types/enum-deodar-array-type.php` - Array type enum
-- `lib/types/enum-deodar-scan-type.php` - Scan type enum
+- `lib/models/enum-deodar-array-type.php` - Array type enum
+- `lib/models/enum-deodar-scan-type.php` - Scan type enum
 - `lib/class-deodar.php` - Main class that uses these functions

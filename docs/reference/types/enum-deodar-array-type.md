@@ -1,6 +1,6 @@
 # enum-deodar-array-type.php
 
-**File:** `lib/types/enum-deodar-array-type.php`  
+**File:** `lib/models/enum-deodar-array-type.php`  
 **Package:** Deodar  
 **Since:** 2.0.0  
 **Author:** Brock Cataldi  
@@ -200,4 +200,4 @@ Using this enum provides several benefits:
 ## Related Files
 
 - `lib/deodar-functions.php` - Contains the `_deodar_array_type()` function
-- `lib/deodar-enums.php` - Loads this enum definition
+- `lib/deodar-models.php` - Loads this enum definition

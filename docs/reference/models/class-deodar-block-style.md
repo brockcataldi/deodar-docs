@@ -48,6 +48,33 @@ Initializes the block style with the provided name and namespace.
 
 ### Public Methods
 
+#### `get_block_type_name()`
+```php
+public function get_block_type_name(): string
+```
+**Since:** 2.0.0  
+**Returns:** string - The full block type name in format `{namespace}/{name}`
+
+Gets the complete block type name by combining the namespace and block name.
+
+#### `get_variations_path($blocks_dir_path)`
+```php
+public function get_variations_path(string $blocks_dir_path): string
+```
+**Since:** 2.0.0  
+**Parameters:**
+- `string $blocks_dir_path` - The file path of the blocks directory
+
+**Returns:** string - The path to the variations file
+
+Gets the path to the block variations file. Expected file structure:
+```php
+blocks/
+└── {namespace}/
+    └── {name}/
+        └── {name}.variations.php
+```
+
 #### `enqueue($blocks_dir_path, $blocks_dir_url)`
 ```php
 public function enqueue(string $blocks_dir_path, string $blocks_dir_url)
@@ -78,6 +105,7 @@ This class integrates with WordPress's block system by:
 2. **Style Registration**: Registers the block style with WordPress using `wp_enqueue_block_style`
 3. **File Path Resolution**: Automatically constructs the correct file paths and URLs for the CSS file
 4. **Handle Generation**: Creates a unique handle for the style (`deodar-{namespace}-{block-name}`)
+5. **Variations Support**: Provides path resolution for block variations files
 
 ## Related Classes
 
@@ -89,3 +117,4 @@ This class integrates with WordPress's block system by:
 
 - `wp_enqueue_block_style()` - WordPress function used internally
 - `_deodar_scan_for_directories()` - Used by Deodar to discover blocks
+- `_deodar_safe_include()` - Used to safely include variation files

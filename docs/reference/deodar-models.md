@@ -7,7 +7,7 @@
 
 ## Overview
 
-This file serves as the loader for all model classes used throughout the Deodar plugin. It conditionally loads model class files to ensure they are available when needed, preventing duplicate class definitions.
+This file serves as the loader for all model classes and enums used throughout the Deodar plugin. It conditionally loads model class files to ensure they are available when needed, preventing duplicate class definitions.
 
 ## Model Loading
 
@@ -79,6 +79,43 @@ if ( false === class_exists( 'Deodar_Support' ) ) {
 **File:** `lib/models/class-deodar-support.php`  
 **Purpose:** Manages WordPress theme support features.
 
+
+## Enum Loading
+
+The file conditionally loads enum definitions based on their existence:
+
+### `Deodar_Array_Type` Enum
+
+```php
+if ( false === enum_exists( 'Deodar_Array_Type' ) ) {
+    require DEODAR_MODELS_PATH . '/enum-deodar-array-type.php';
+}
+```
+
+**File:** `lib/models/enum-deodar-array-type.php`  
+**Purpose:** Defines array type classifications used by `_deodar_array_type()` function.
+
+**Cases:**
+- `NEITHER` - Value is not an array
+- `SEQUENTIAL` - Sequential array (list)
+- `ASSOCIATIVE` - Associative array
+
+### `Deodar_Scan_Type` Enum
+
+```php
+if ( false === enum_exists( 'Deodar_Scan_Type' ) ) {
+    require DEODAR_MODELS_PATH . '/enum-deodar-scan-type.php';
+}
+```
+
+**File:** `lib/models/enum-deodar-scan-type.php`  
+**Purpose:** Defines scan type options for file and directory scanning functions.
+
+**Cases:**
+- `PATHS` - Return full file paths
+- `NAMES` - Return names only
+- `BOTH` - Return both names and paths
+
 ## Class Hierarchy
 
 ```php
@@ -128,7 +165,29 @@ $support = new Deodar_Support([
 
 // Create a block style instance
 $block_style = new Deodar_Block_Style('my-block', 'my-namespace');
+
+// Array type checking
+$array_type = _deodar_array_type($some_value);
+switch ($array_type) {
+    case Deodar_Array_Type::SEQUENTIAL:
+        // Handle sequential array
+        break;
+    case Deodar_Array_Type::ASSOCIATIVE:
+        // Handle associative array
+        break;
+    case Deodar_Array_Type::NEITHER:
+        // Handle non-array value
+        break;
+}
+
+// File scanning
+$files = _deodar_scan_for_files(
+    '/path/to/directory',
+    Deodar_Scan_Type::NAMES
+);
 ```
+
+
 
 ## Model Classes Overview
 
@@ -144,6 +203,11 @@ $block_style = new Deodar_Block_Style('my-block', 'my-namespace');
 - **`Deodar_Block_Style`** - Handles WordPress block style registration
 - **`Deodar_Customization`** - Abstract base for WordPress customizer functionality
 
+### Enum Classes
+
+- **`Deodar_Array_Type`** - Defines array type classifications (NEITHER, SEQUENTIAL, ASSOCIATIVE)
+- **`Deodar_Scan_Type`** - Defines scan type options for file/directory operations (PATHS, NAMES, BOTH)
+
 ## Related Files
 
 - `lib/models/class-deodar-block-style.php` - Block style management
@@ -152,4 +216,6 @@ $block_style = new Deodar_Block_Style('my-block', 'my-namespace');
 - `lib/models/class-deodar-style.php` - Style management
 - `lib/models/class-deodar-customization.php` - Customizer base class
 - `lib/models/class-deodar-support.php` - Theme support management
+- `lib/models/enum-deodar-array-type.php` - Array type enum
+- `lib/models/enum-deodar-scan-type.php` - Scan type enum
 - `lib/class-deodar.php` - Main class that uses these models

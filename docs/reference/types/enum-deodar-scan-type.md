@@ -1,6 +1,6 @@
 # enum-deodar-scan-type.php
 
-**File:** `lib/types/enum-deodar-scan-type.php`  
+**File:** `lib/models/enum-deodar-scan-type.php`  
 **Package:** Deodar  
 **Since:** 2.0.0  
 **Author:** Brock Cataldi  
@@ -236,4 +236,4 @@ Choose the appropriate scan type based on your needs:
 ## Related Files
 
 - `lib/deodar-functions.php` - Contains the scanning functions
-- `lib/deodar-enums.php` - Loads this enum definition
+- `lib/deodar-models.php` - Loads this enum definition

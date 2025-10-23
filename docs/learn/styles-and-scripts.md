@@ -45,7 +45,7 @@ add_filter('deodar', function($data) {
 'styles' => [
     [
         'handle' => 'main-style',
-        'file' => '/source/index.scss',
+        'file' => '/build/index.build.scss',
         'frontend' => true,
         'backend' => false
     ]
@@ -57,12 +57,16 @@ add_filter('deodar', function($data) {
 | Option | Type | Required | Description |
 |--------|------|----------|-------------|
 | `handle` | string | ✅ | Unique identifier for the style |
-| `file` | string | ✅ | Path to the SCSS file (relative to project root) |
+| `file` | string | ⚠️ | Path to the SCSS file (relative to project root) |
+| `url` | string | ⚠️ | External URL for the style |
 | `frontend` | bool | ❌ | Load on frontend (default: true) |
 | `backend` | bool | ❌ | Load on backend/admin (default: false) |
+| `template` | string/array | ❌ | Specific template(s) to load this style on |
 | `dependencies` | array | ❌ | Array of style handles this depends on |
 | `version` | string | ❌ | Version string for cache busting |
 | `media` | string | ❌ | CSS media type (default: 'all') |
+
+> ⚠️ Either `file` or `url` is required (not both)
 
 ### Advanced Style Configuration
 
@@ -112,12 +116,16 @@ add_filter('deodar', function($data) {
 | Option | Type | Required | Description |
 |--------|------|----------|-------------|
 | `handle` | string | ✅ | Unique identifier for the script |
-| `file` | string | ✅ | Path to the JavaScript file (relative to project root) |
+| `file` | string | ⚠️ | Path to the JavaScript file (relative to project root) |
+| `url` | string | ⚠️ | External URL for the script |
 | `frontend` | bool | ❌ | Load on frontend (default: true) |
 | `backend` | bool | ❌ | Load on backend/admin (default: false) |
+| `template` | string/array | ❌ | Specific template(s) to load this script on |
 | `dependencies` | array | ❌ | Array of script handles this depends on |
 | `version` | string | ❌ | Version string for cache busting |
 | `args` | bool | ❌ | Load in footer (default: false) |
+
+> ⚠️ Either `file` or `url` is required (not both)
 
 ### Advanced Script Configuration
 
@@ -164,19 +172,131 @@ your-project/
 │   ├── index.build.css.map
 │   ├── index.build.js
 │   └── index.build.js.map
-└── your-main-file.php          # Main plugin/theme file
+└── ...                         # Other files
 ```
 
-### SCSS File Organization
+## Template-Specific Loading
 
+### Template Key Usage
+
+The `template` key allows you to load assets only on specific templates, improving performance by loading only what's needed:
+
+```php
+'styles' => [
+    [
+        'handle' => 'homepage-style',
+        'file' => '/build/homepage.build.css',
+        'template' => 'front-page.php',
+        'frontend' => true,
+        'backend' => false
+    ],
+    [
+        'handle' => 'blog-style',
+        'file' => '/build/blog.build.css',
+        'template' => ['index.php', 'single.php', 'archive.php'],
+        'frontend' => true,
+        'backend' => false
+    ]
+]
+```
+
+### Common Template Patterns
+
+A common pattern is to have global assets that are always loaded, plus template-specific assets. The global `index.scss` and `index.js` files import header styles and scripts:
+
+```php
+'styles' => [
+    // Always loaded global styles (includes header via @use)
+    [
+        'handle' => 'main-style',
+        'file' => '/build/index.build.css',
+        'frontend' => true,
+        'backend' => false
+    ],
+    // Template-specific styles
+    [
+        'handle' => 'homepage-style',
+        'file' => '/build/homepage.build.css',
+        'template' => 'front-page.php',
+        'frontend' => true,
+        'backend' => false
+    ],
+    [
+        'handle' => 'contact-style',
+        'file' => '/build/contact.build.css',
+        'template' => 'page-contact.php',
+        'frontend' => true,
+        'backend' => false
+    ]
+],
+'scripts' => [
+    // Always loaded global scripts (includes header via import)
+    [
+        'handle' => 'main-script',
+        'file' => '/build/index.build.js',
+        'frontend' => true,
+        'backend' => false
+    ],
+    // Template-specific scripts
+    [
+        'handle' => 'homepage-script',
+        'file' => '/build/homepage.build.js',
+        'template' => 'front-page.php',
+        'frontend' => true,
+        'backend' => false
+    ]
+]
+```
+
+### File Organization for Template-Specific Assets
+
+```
+your-project/
+├── source/
+│   ├── index.scss              # Global styles (imports header.scss)
+│   ├── index.js                # Global scripts (imports header.js)
+│   ├── homepage.scss           # Homepage-specific styles
+│   ├── homepage.js             # Homepage-specific scripts
+│   ├── contact.scss            # Contact page styles
+│   └── contact.js              # Contact page scripts
+├── template-parts/
+│   ├── header/
+│   │   ├── header.scss         # Header styles (imported by index.scss)
+│   │   └── header.js           # Header scripts (imported by index.js)
+│   └── footer/
+│       ├── footer.scss         # Footer styles (imported by index.scss)
+│       └── footer.js           # Footer scripts (imported by index.js)
+└── build/                      # Compiled assets
+    ├── index.build.css
+    ├── homepage.build.css
+    └── contact.build.css
+```
+
+### Import Patterns
+
+**In `source/index.scss`:**
 ```scss
-// source/index.scss
-@import 'variables';
-@import 'mixins';
-@import 'base';
-@import 'components';
-@import 'layouts';
-@import 'utilities';
+
+// Template part styles
+@use '../template-parts/header/header.scss';
+@use '../template-parts/footer/footer.scss';
+
+// Global styles
+body {
+    font-family: 'Roboto', sans-serif;
+}
+```
+
+**In `source/index.js`:**
+```javascript
+// Import template part scripts
+import Header from '../template-parts/header/header.js';
+import Footer from '../template-parts/footer/footer.js';
+
+// Global JavaScript
+$(document).ready(function() {
+    console.log('Global script loaded');
+});
 ```
 
 ## External Dependencies
@@ -305,7 +425,7 @@ add_filter('deodar', function($data) {
         'styles' => [
             [
                 'handle' => 'main-style',
-                'file' => '/source/index.scss',
+                'file' => '/build/index.build.scss',
                 'frontend' => true,
                 'backend' => false
             ]
@@ -313,7 +433,7 @@ add_filter('deodar', function($data) {
         'scripts' => [
             [
                 'handle' => 'main-script',
-                'file' => '/source/index.js',
+                'file' => '/build/index.build.js',
                 'dependencies' => ['jquery'],
                 'frontend' => true,
                 'backend' => false
@@ -399,40 +519,68 @@ add_filter('deodar', function($data) {
         'url' => get_template_directory_uri(),
         'production' => false,
         'styles' => [
+            // External dependencies
             [
                 'handle' => 'google-fonts',
                 'url' => 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap',
                 'frontend' => true,
                 'backend' => false
             ],
+            // Global styles (includes header via @use in source/index.scss)
             [
                 'handle' => 'main-style',
-                'file' => '/source/index.scss',
-                'dependencies' => ['google-fonts'],
+                'file' => '/build/index.build.css',
                 'version' => '1.0.0',
                 'frontend' => true,
                 'backend' => false
             ],
+            // Template-specific styles
+            [
+                'handle' => 'homepage-style',
+                'file' => '/build/homepage.build.css',
+                'template' => 'front-page.php',
+                'frontend' => true,
+                'backend' => false
+            ],
+            [
+                'handle' => 'blog-style',
+                'file' => '/build/blog.build.css',
+                'template' => ['index.php', 'single.php', 'archive.php'],
+                'frontend' => true,
+                'backend' => false
+            ],
+            // Admin styles
             [
                 'handle' => 'admin-style',
-                'file' => '/source/admin.scss',
+                'file' => '/build/admin.build.css',
                 'frontend' => false,
                 'backend' => true
             ]
         ],
         'scripts' => [
+            // Global scripts (includes header via import in source/index.js)
             [
                 'handle' => 'main-script',
-                'file' => '/source/index.js',
+                'file' => '/build/index.build.js',
                 'dependencies' => ['jquery'],
                 'version' => '1.0.0',
                 'args' => true,
                 'frontend' => true,
                 'backend' => false
             ],
+            // Template-specific scripts
+            [
+                'handle' => 'homepage-script',
+                'file' => '/build/homepage.build.js',
+                'template' => 'front-page.php',
+                'dependencies' => ['jquery'],
+                'frontend' => true,
+                'backend' => false
+            ],
+            // Admin scripts
             [
                 'handle' => 'admin-script',
-                'file' => '/source/admin.js',
+                'file' => '/build/admin.build.js',
                 'dependencies' => ['jquery'],
                 'frontend' => false,
                 'backend' => true
@@ -446,7 +594,7 @@ add_filter('deodar', function($data) {
 
 Now that you understand how to manage styles and scripts:
 
-- [Create your first custom block](./creating-blocks)
+- [Create your first ACF block](./creating-blocks)
 - [Learn about the CLI tool](./cli-tool)
 - [Explore block variations](./working-with-non-acf-blocks)
 - [Learn about Production Builds](./production-builds)

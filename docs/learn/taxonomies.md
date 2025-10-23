@@ -370,56 +370,6 @@ foreach ($genres as $genre):
 endforeach;
 ```
 
-## REST API Integration
-
-### Enabling REST API
-
-```json
-{
-    "show_in_rest": true,
-    "rest_base": "genres",
-    "rest_namespace": "wp/v2",
-    "rest_controller_class": "WP_REST_Terms_Controller"
-}
-```
-
-### Custom REST API Endpoints
-
-```php
-// Add custom REST API endpoint for genres
-add_action('rest_api_init', function() {
-    register_rest_route('custom/v1', '/genres/popular', [
-        'methods' => 'GET',
-        'callback' => 'get_popular_genres',
-        'permission_callback' => '__return_true'
-    ]);
-});
-
-function get_popular_genres($request) {
-    $genres = get_terms([
-        'taxonomy' => 'genre',
-        'hide_empty' => true,
-        'orderby' => 'count',
-        'order' => 'DESC',
-        'number' => 10
-    ]);
-    
-    $data = [];
-    foreach ($genres as $genre) {
-        $data[] = [
-            'id' => $genre->term_id,
-            'name' => $genre->name,
-            'slug' => $genre->slug,
-            'count' => $genre->count,
-            'color' => get_field('color', $genre),
-            'icon' => get_field('icon', $genre)
-        ];
-    }
-    
-    return $data;
-}
-```
-
 ## Best Practices
 
 ### Taxonomy Design

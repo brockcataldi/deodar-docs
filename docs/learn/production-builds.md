@@ -39,9 +39,6 @@ add_filter('deodar', function($config) {
         'production' => true  // Enable production mode
     ];
 });
-
-// Initialize Deodar
-require_once __DIR__ . '/deodar/deodar.php';
 ```
 
 ### Production Mode Benefits
@@ -95,22 +92,6 @@ The production build command:
 2. **Block Compilation**: Compiles all block assets
 3. **Minification**: Minifies CSS and JavaScript
 4. **Optimization**: Optimizes file sizes and performance
-
-### Example Build Output
-
-```bash
-$ deodar production
-
-🚀 Starting Deodar Build Process...
-
-✅ Compiled source/styles.scss → build/styles.build.css
-✅ Compiled source/scripts.js → build/scripts.build.js
-✅ Compiled blocks/core/paragraph/paragraph.scss → blocks/core/paragraph/build/paragraph.build.css
-✅ Compiled blocks/core/heading/heading.scss → blocks/core/heading/build/heading.build.css
-✅ Compiled blocks/acf/testimonial/testimonial.scss → blocks/acf/testimonial/build/testimonial.build.css
-
-🎉 Build completed successfully!
-```
 
 ## Bundling
 
@@ -166,21 +147,6 @@ your-project/
 ├── blocks/
 ├── includes/
 └── your-main-file.php
-```
-
-### Example Bundle Process
-
-```bash
-$ deodar bundle
-
-📦 Creating bundle for your-project...
-
-✅ Scanning project files...
-✅ Applying exclusion patterns...
-✅ Creating archive...
-✅ Compressing with high compression...
-
-🎉 Bundle created: dist/your-project.zip (2.3 MB)
 ```
 
 ## Development vs Production

@@ -101,7 +101,7 @@ add_filter('deodar', function($data) {
 });
 ```
 
-### 3. Install the CLI Tool (Optional)
+### 3. Install the CLI Tool
 
 For enhanced development experience, install the Deodar CLI tool:
 

@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Theme vs Plugin: Choosing Your Development Approach
+# Theme vs Plugin
 
 When starting a new Deodar project, one of the first decisions you'll make is whether to build a custom theme or a plugin. This guide will help you understand the differences and make the right choice for your project.
 

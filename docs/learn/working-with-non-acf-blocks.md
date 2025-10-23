@@ -153,19 +153,6 @@ touch blocks/core/paragraph/paragraph.variations.php
    // Add custom variations for the paragraph block
    add_filter('deodar_core_paragraph_variations', function($variations) {
        
-       // Default Paragraph Variation
-       $variations[] = [
-           'name' => 'default',
-           'title' => 'Default Paragraph',
-           'description' => 'A standard paragraph with default styling',
-           'category' => 'text',
-           'keywords' => ['paragraph', 'text', 'default'],
-           'attributes' => [
-               'className' => 'is-default'
-           ],
-           'innerBlocks' => []
-       ];
-       
        // Highlighted Paragraph Variation
        $variations[] = [
            'name' => 'highlighted',
@@ -175,8 +162,7 @@ touch blocks/core/paragraph/paragraph.variations.php
            'keywords' => ['paragraph', 'text', 'highlighted'],
            'attributes' => [
                'className' => 'is-highlighted'
-           ],
-           'innerBlocks' => []
+           ]
        ];
        
        // Large Text Paragraph Variation
@@ -188,8 +174,7 @@ touch blocks/core/paragraph/paragraph.variations.php
            'keywords' => ['paragraph', 'text', 'large'],
            'attributes' => [
                'className' => 'is-large-text'
-           ],
-           'innerBlocks' => []
+           ]
        ];
        
        return $variations;

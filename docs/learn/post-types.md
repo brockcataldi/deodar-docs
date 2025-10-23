@@ -107,7 +107,7 @@ Create a JSON file in the `includes/post-types/` directory:
 | `hierarchical` | bool | Whether post type supports hierarchy |
 | `show_ui` | bool | Show in admin interface |
 | `show_in_menu` | bool | Show in admin menu |
-| `show_in_rest` | bool | Enable REST API support |
+| `show_in_rest` | bool | Enable REST API support **Required to utilize the block editor** |
 
 ### Labels Configuration
 
@@ -289,114 +289,6 @@ get_header(); ?>
 </div>
 
 <?php get_footer(); ?>
-```
-
-## Querying Custom Post Types
-
-### Basic Query
-
-```php
-// Query movies
-$movies = new WP_Query([
-    'post_type' => 'movie',
-    'posts_per_page' => 10,
-    'meta_key' => 'release_date',
-    'orderby' => 'meta_value',
-    'order' => 'DESC'
-]);
-
-if ($movies->have_posts()):
-    while ($movies->have_posts()): $movies->the_post();
-        // Display movie content
-        the_title();
-        the_field('director');
-    endwhile;
-    wp_reset_postdata();
-endif;
-```
-
-### Advanced Query with Meta Fields
-
-```php
-// Query movies by rating
-$rated_movies = new WP_Query([
-    'post_type' => 'movie',
-    'posts_per_page' => -1,
-    'meta_query' => [
-        [
-            'key' => 'rating',
-            'value' => 'PG-13',
-            'compare' => '='
-        ]
-    ]
-]);
-```
-
-### Using get_posts()
-
-```php
-// Get latest movies
-$latest_movies = get_posts([
-    'post_type' => 'movie',
-    'numberposts' => 5,
-    'meta_key' => 'release_date',
-    'orderby' => 'meta_value',
-    'order' => 'DESC'
-]);
-
-foreach ($latest_movies as $movie):
-    setup_postdata($movie);
-    // Display movie
-endforeach;
-wp_reset_postdata();
-```
-
-## REST API Integration
-
-### Enabling REST API
-
-```json
-{
-    "show_in_rest": true,
-    "rest_base": "movies",
-    "rest_namespace": "wp/v2",
-    "rest_controller_class": "WP_REST_Posts_Controller"
-}
-```
-
-### Custom REST API Endpoints
-
-```php
-// Add custom REST API endpoint for movies
-add_action('rest_api_init', function() {
-    register_rest_route('custom/v1', '/movies/featured', [
-        'methods' => 'GET',
-        'callback' => 'get_featured_movies',
-        'permission_callback' => '__return_true'
-    ]);
-});
-
-function get_featured_movies($request) {
-    $movies = get_posts([
-        'post_type' => 'movie',
-        'meta_key' => 'featured',
-        'meta_value' => true,
-        'posts_per_page' => 5
-    ]);
-    
-    $data = [];
-    foreach ($movies as $movie) {
-        $data[] = [
-            'id' => $movie->ID,
-            'title' => $movie->post_title,
-            'director' => get_field('director', $movie->ID),
-            'release_date' => get_field('release_date', $movie->ID),
-            'permalink' => get_permalink($movie->ID)
-        ];
-    }
-    
-    return $data;
-}
 ```
 
 ## Best Practices

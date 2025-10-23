@@ -18,8 +18,6 @@ Deodar's customization system provides:
 
 ## Creating Customizations
 
-### Method 1: Manual Creation (Recommended)
-
 Create customization files manually in the `includes/customizations/` directory:
 
 ```bash

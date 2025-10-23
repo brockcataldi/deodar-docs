@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # Creating Blocks
 
-Deodar supports two types of blocks: ACF provider blocks and Core provider blocks. This guide will show you how to create both types and understand when to use each approach.
+Deodar supports two types of blocks: ACF provider blocks and Core provider blocks. This guide will show you how to create both types and understand when to use each approach. To modify core or other provider blocks check out [Working with Non ACF Blocks](./working-with-non-acf-blocks.md)
 
 ## Block Types Overview
 
@@ -13,12 +13,6 @@ Deodar supports two types of blocks: ACF provider blocks and Core provider block
 - **Features**: ACF Pro integration, custom field management, advanced data handling
 - **Location**: `blocks/acf/` directory
 - **Files**: `block.json`, `block.php`, `block.scss`, `block.js` (optional)
-
-### Core Provider Blocks
-- **Use Case**: Simple blocks without custom fields, styling existing blocks
-- **Features**: WordPress core block styling, variations, simple functionality
-- **Location**: `blocks/core/` directory
-- **Files**: `block.scss`, `block.variations.php` (optional)
 
 ## ACF Provider Blocks
 
@@ -169,81 +163,15 @@ Create an ACF field group for your block:
 ```
 blocks/acf/hero-section/
 ├── block.json              # Block configuration
-├── block.php               # PHP template
+├── hero-section.php        # PHP template
 ├── block.scss              # Stylesheet
 ├── block.js                # JavaScript (optional)
 ├── hero-section.field-group.json  # ACF field group (auto-generated)
 └── build/                  # Compiled assets (auto-generated)
     ├── hero-section.build.css
-    ├── hero-section.build.css.map
+    ├── hero-section.build.css.map # Development file
     ├── hero-section.build.js
-    └── hero-section.build.js.map
-```
-
-## Core Provider Blocks
-
-### Creating a Core Block
-
-Core blocks are used for styling existing WordPress blocks or creating simple variations.
-
-#### Example: Styling the Paragraph Block
-
-1. **Create Block Directory**
-   ```
-   blocks/core/paragraph/
-   ```
-
-2. **Create paragraph.scss**
-   ```scss
-   .wp-block-paragraph {
-       margin-bottom: 1.5rem;
-       line-height: 1.6;
-       
-       &.has-large-font-size {
-           font-size: 1.25rem;
-           font-weight: 600;
-       }
-       
-       &.has-text-align-center {
-           text-align: center;
-       }
-       
-       &.has-text-align-right {
-           text-align: right;
-       }
-   }
-   ```
-
-3. **Create paragraph.variations.php (Optional)**
-   ```php
-   <?php
-   // Add custom paragraph variations
-   add_filter('deodar_paragraph_variations', function($variations) {
-       $variations[] = [
-           'name' => 'highlighted',
-           'title' => 'Highlighted Paragraph',
-           'description' => 'A paragraph with highlighted styling',
-           'category' => 'text',
-           'keywords' => ['highlight', 'emphasis'],
-           'attributes' => [
-               'className' => 'is-highlighted'
-           ]
-       ];
-       
-       return $variations;
-   });
-   ?>
-   ```
-
-### Core Block Structure
-
-```
-blocks/core/paragraph/
-├── paragraph.scss           # Block styles
-├── paragraph.variations.php # Block variations (optional)
-└── build/                  # Compiled assets (auto-generated)
-    ├── paragraph.build.css
-    └── paragraph.build.css.map
+    └── hero-section.build.js.map  # Development file
 ```
 
 ## Block Configuration Options
@@ -341,10 +269,10 @@ deodar watch
 ```php
 // blocks/acf/testimonial/block.php
 <?php
-$quote = get_field('quote') ?: 'Default testimonial quote';
-$author = get_field('author') ?: 'Default Author';
-$company = get_field('company') ?: 'Default Company';
-$avatar = get_field('avatar');
+    $quote = get_field('quote') ?: 'Default testimonial quote';
+    $author = get_field('author') ?: 'Default Author';
+    $company = get_field('company') ?: 'Default Company';
+    $avatar = get_field('avatar');
 ?>
 
 <div class="testimonial-block">
@@ -361,33 +289,6 @@ $avatar = get_field('avatar');
         </div>
     </div>
 </div>
-```
-
-### Core Block Styling Example
-
-```scss
-// blocks/core/quote/quote.scss
-.wp-block-quote {
-    border-left: 4px solid #007cba;
-    padding-left: 1.5rem;
-    margin: 2rem 0;
-    font-style: italic;
-    
-    &.is-style-large {
-        font-size: 1.25rem;
-        padding: 2rem;
-        background-color: #f8f9fa;
-        border-radius: 8px;
-    }
-    
-    cite {
-        display: block;
-        margin-top: 1rem;
-        font-style: normal;
-        font-weight: 600;
-        color: #666;
-    }
-}
 ```
 
 ## Troubleshooting
@@ -415,10 +316,9 @@ $avatar = get_field('avatar');
 ## Next Steps
 
 Now that you can create blocks:
-
+- [Working with Non ACF Blocks](./working-with-non-acf-blocks)
 - [Learn about Post Types](./post-types)
 - [Explore Taxonomies](./taxonomies)
-- [Discover Block Variations](./working-with-non-acf-blocks)
 - [Learn about Production Builds](./production-builds)
 - [Master the CLI Tool](./cli-tool)
 

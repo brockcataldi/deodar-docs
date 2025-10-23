@@ -12,7 +12,7 @@ Deodar supports two types of blocks: ACF provider blocks and Core provider block
 - **Use Case**: Blocks that require custom fields and complex data
 - **Features**: ACF Pro integration, custom field management, advanced data handling
 - **Location**: `blocks/acf/` directory
-- **Files**: `block.json`, `block.php`, `block.scss`, `block.js` (optional)
+- **Files**: `block.json`, `{block-name}.php`, `block.scss`, `block.js` (optional)
 
 ## ACF Provider Blocks
 
@@ -61,7 +61,7 @@ deodar new hero-section
    }
    ```
 
-3. **Create block.php**
+3. **Create hero-section.php**
    ```php
    <?php
    $title = get_field('title') ?: 'Default Title';
@@ -163,7 +163,7 @@ Create an ACF field group for your block:
 ```
 blocks/acf/hero-section/
 ├── block.json              # Block configuration
-├── hero-section.php        # PHP template
+├── hero-section.php        # PHP template (matches folder basename)
 ├── block.scss              # Stylesheet
 ├── block.js                # JavaScript (optional)
 ├── hero-section.field-group.json  # ACF field group (auto-generated)
@@ -267,7 +267,7 @@ deodar watch
 ### Complete ACF Block Example
 
 ```php
-// blocks/acf/testimonial/block.php
+// blocks/acf/testimonial/testimonial.php
 <?php
     $quote = get_field('quote') ?: 'Default testimonial quote';
     $author = get_field('author') ?: 'Default Author';

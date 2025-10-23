@@ -88,7 +88,7 @@ const config: Config = {
           items: [
             {
               label: 'Learn',
-              to: '/docs/learn/intro',
+              to: '/docs/learn/',
             },
             {
               label: 'Reference',
@@ -96,7 +96,7 @@ const config: Config = {
             },
             {
               label: 'Examples',
-              to: '/docs/examples/quickstart',
+              to: '/docs/examples/',
             },
           ],
         },

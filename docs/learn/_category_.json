@@ -1,8 +1,4 @@
 {
   "label": "Learn",
-  "position": 1,
-  "link": {
-    "type": "generated-index",
-    "description": "Learn the fundamentals and get started with our platform."
-  }
+  "position": 1
 }

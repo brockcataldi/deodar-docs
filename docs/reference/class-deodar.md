@@ -218,7 +218,10 @@ public function save_file_name($filename, $post)
 
 **Hook:** `acf/json/save_file_name`
 
-Customizes ACF JSON file naming by sanitizing the field group title.
+Customizes ACF JSON file naming with the following priority:
+1. If location is set and has a single location rule, uses the location value as the filename
+2. Falls back to the sanitized field group title
+3. Returns the original filename if neither is available
 
 #### `save_paths($paths, $post)`
 ```php

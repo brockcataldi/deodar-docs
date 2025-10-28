@@ -2,28 +2,16 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-
 const config: Config = {
   title: 'Deodar',
-  tagline: 'A simpler way to build WordPress themes and plugins',
+  tagline: 'An ACF Pro powered theme and plugin framework',
   favicon: 'img/favicon.ico',
-
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    v4: true,
   },
-
-  // Set the production url of your site here
   url: 'https://deodar.io',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
   onBrokenLinks: 'throw',
-
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -52,7 +40,7 @@ const config: Config = {
       title: 'Deodar',
       logo: {
         alt: 'Deodar Logo',
-        src: 'img/logo.svg',
+        src: 'img/deodar.svg',
       },
       items: [
         {
@@ -67,12 +55,12 @@ const config: Config = {
           position: 'left',
           label: 'Reference',
         },
-        {
-          type: 'docSidebar',
-          sidebarId: 'examplesSidebar',
-          position: 'left',
-          label: 'Examples',
-        },
+        // {
+        //   type: 'docSidebar',
+        //   sidebarId: 'examplesSidebar',
+        //   position: 'left',
+        //   label: 'Examples',
+        // },
         {
           href: 'https://github.com/brockcataldi/deodar',
           label: 'GitHub',

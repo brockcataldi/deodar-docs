@@ -6,6 +6,37 @@
 }
 
 .featureSvg {
-  height: 200px;
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.featureSvgACF {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.featureSvgDeodar {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.featureSvgESBuildAndSass {
+  height: 100px;
   width: 200px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+[data-theme='dark'] .featureSvgACF {
+  color: #ffffff;
+}
+
+[data-theme='light'] .featureSvgCLI {
+  color: #000000;
 }

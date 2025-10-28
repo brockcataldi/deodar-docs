@@ -151,14 +151,7 @@ If you encounter issues:
    - Check the [GitHub repository](https://github.com/brockcataldi/deodar) for issues
    - Create a new issue if you don't find a solution
 
-## Next Steps
 
-Now that Deodar is installed, you can:
-
-- [Choose between Theme or Plugin development](./theme-vs-plugin)
-- [Set up your first project configuration](./styles-and-scripts)
-- [Create your first custom block](./creating-blocks)
-- [Learn about the CLI tool](./cli-tool)
 
 ## System Requirements
 
@@ -183,4 +176,13 @@ Now that Deodar is installed, you can:
 
 ---
 
+## Next Steps
+
 Ready to start building? Check out our [Theme vs Plugin guide](./theme-vs-plugin) to decide your development approach!
+
+Here are some other guides to aid your Deodar Journey:
+
+- [Choose between Theme or Plugin development](./theme-vs-plugin)
+- [Set up your first project configuration](./styles-and-scripts)
+- [Create your first custom block](./creating-blocks)
+- [Learn about the CLI tool](./cli-tool)

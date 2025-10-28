@@ -392,51 +392,6 @@ deodar watch --verbose
 3. **Bundle Security**: Review bundle contents before distribution
 4. **Dependencies**: Keep dependencies up to date
 
-## Integration with Other Tools
-
-### VS Code Integration
-
-Add tasks to `.vscode/tasks.json`:
-
-```json
-{
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Deodar: Watch",
-            "type": "shell",
-            "command": "deodar",
-            "args": ["watch"],
-            "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared"
-            }
-        },
-        {
-            "label": "Deodar: Build",
-            "type": "shell",
-            "command": "deodar",
-            "args": ["production"],
-            "group": "build"
-        }
-    ]
-}
-```
-
-### Git Hooks
-
-Add pre-commit hooks for automatic building:
-
-```bash
-# .git/hooks/pre-commit
-#!/bin/bash
-deodar production
-git add build/
-```
-
 ## Next Steps
 
 Now that you've mastered the CLI tool:

@@ -32,7 +32,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/deodar-social.png',
     colorMode: {
       respectPrefersColorScheme: true,
     },

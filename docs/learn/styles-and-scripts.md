@@ -80,7 +80,7 @@ add_filter('deodar', function($data) {
     ],
     [
         'handle' => 'main-style',
-        'file' => '/source/index.scss',
+        'file' => '/build/index.css',
         'dependencies' => ['google-fonts'],
         'version' => '1.0.0',
         'media' => 'all',
@@ -89,7 +89,7 @@ add_filter('deodar', function($data) {
     ],
     [
         'handle' => 'admin-style',
-        'file' => '/source/admin.scss',
+        'file' => '/build/admin.build.css',
         'frontend' => false,
         'backend' => true
     ]
@@ -104,7 +104,7 @@ add_filter('deodar', function($data) {
 'scripts' => [
     [
         'handle' => 'main-script',
-        'file' => '/source/index.js',
+        'file' => '/build/index.build.js',
         'frontend' => true,
         'backend' => false
     ]
@@ -139,7 +139,7 @@ add_filter('deodar', function($data) {
     ],
     [
         'handle' => 'main-script',
-        'file' => '/source/index.js',
+        'file' => '/build/index.build.js',
         'dependencies' => ['jquery'],
         'version' => '1.0.0',
         'args' => true, // Load in footer
@@ -148,7 +148,7 @@ add_filter('deodar', function($data) {
     ],
     [
         'handle' => 'admin-script',
-        'file' => '/source/admin.js',
+        'file' => '/build/admin.build.js',
         'dependencies' => ['jquery'],
         'frontend' => false,
         'backend' => true
@@ -333,7 +333,7 @@ Use WordPress core dependencies:
 'scripts' => [
     [
         'handle' => 'custom-script',
-        'file' => '/source/index.js',
+        'file' => '/build/index.build.js',
         'dependencies' => ['jquery', 'wp-api'],
         'frontend' => true,
         'backend' => false

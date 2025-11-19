@@ -1,3 +1,8 @@
+---
+title: Deodar_Script Class Reference
+description: Reference documentation for the Deodar_Script class, which extends Deodar_Enqueuable to provide JavaScript file management functionality.
+---
+
 # class-deodar-script.php
 
 **File:** `lib/models/class-deodar-script.php`  

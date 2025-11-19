@@ -1,5 +1,7 @@
 ---
 sidebar_position: 1
+title: Getting Started with Deodar
+description: Learn about Deodar, a powerful WordPress development framework that streamlines the creation of custom themes and plugins with Advanced Custom Fields (ACF) integration.
 ---
 
 # Getting Started

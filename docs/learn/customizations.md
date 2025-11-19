@@ -1,5 +1,7 @@
 ---
 sidebar_position: 8
+title: WordPress Customizer Integration
+description: Learn how to use Deodar's customization system to integrate with the WordPress Customizer for theme settings and options.
 ---
 
 # Customizations

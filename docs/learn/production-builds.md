@@ -1,5 +1,7 @@
 ---
-sidebar_position: 10
+sidebar_position: 11
+title: Production Builds and Deployment
+description: Learn how to optimize and build your Deodar project for production, including asset optimization, build processes, and deployment best practices.
 ---
 
 # Production Builds

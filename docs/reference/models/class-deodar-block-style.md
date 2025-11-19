@@ -1,3 +1,8 @@
+---
+title: Deodar_Block_Style Class Reference
+description: Reference documentation for the Deodar_Block_Style class, which manages WordPress block style registration and enqueuing.
+---
+
 # class-deodar-block-style.php
 
 **File:** `lib/models/class-deodar-block-style.php`  

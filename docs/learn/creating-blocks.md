@@ -1,5 +1,7 @@
 ---
 sidebar_position: 5
+title: Creating Custom Blocks
+description: Complete guide to creating ACF provider blocks and Core provider blocks in Deodar, including CLI tools, manual creation, and block structure.
 ---
 
 # Creating Blocks

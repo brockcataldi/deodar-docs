@@ -1,5 +1,7 @@
 ---
 sidebar_position: 6
+title: Creating Custom Post Types
+description: Learn how to create and register custom post types in Deodar, including configuration, field groups, and ACF integration.
 ---
 
 # Post Types

@@ -1,3 +1,8 @@
+---
+title: Deodar_Scan_Type Enum Reference
+description: Reference documentation for the Deodar_Scan_Type enum, which defines return type options for file and directory scanning functions.
+---
+
 # enum-deodar-scan-type.php
 
 **File:** `lib/models/enum-deodar-scan-type.php`  

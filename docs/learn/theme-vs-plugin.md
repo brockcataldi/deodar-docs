@@ -1,5 +1,7 @@
 ---
 sidebar_position: 3
+title: Theme vs Plugin - Choosing Your Approach
+description: Understand the differences between building a theme or plugin with Deodar, and learn which approach is right for your project using our starter examples.
 ---
 
 # Theme vs Plugin
@@ -10,6 +12,31 @@ When starting a new Deodar project, one of the first decisions you'll make is wh
 
 Both themes and plugins can use Deodar effectively, but they serve different purposes and have different capabilities. Understanding these differences is crucial for making the right architectural decision.
 
+## Quick Start
+
+The fastest way to get started with Deodar is to use one of our starter projects. These provide a complete, working foundation with all the necessary configuration and structure already in place.
+
+### Theme Starter
+
+```bash
+npx degit https://github.com/brockcataldi/deodar-examples/tree/main/starters/deodar-base-theme your-theme-name
+```
+
+### Plugin Starter
+
+```bash
+npx degit https://github.com/brockcataldi/deodar-examples/tree/main/starters/deodar-base-plugin your-plugin-name
+```
+
+Both starters include:
+- Complete Deodar configuration
+- Example blocks (ACF and Core)
+- Sample post types and taxonomies
+- Asset compilation setup
+- Proper WordPress structure
+
+See the [Deodar Examples repository](https://github.com/brockcataldi/deodar-examples) for detailed setup instructions.
+
 ## When to Choose a Theme
 
 ### Use a Theme When:
@@ -19,6 +46,19 @@ Both themes and plugins can use Deodar effectively, but they serve different pur
 - **Full Control**: You want complete control over the website's appearance and structure
 - **Template System**: You need custom page templates, post templates, or archive layouts
 - **Design-Centric**: The primary focus is on visual design and user experience
+
+### Getting Started with Theme Starter
+
+Use the theme starter to quickly bootstrap your project:
+
+```bash
+npx degit https://github.com/brockcataldi/deodar-examples/tree/main/starters/deodar-base-theme your-theme-name
+```
+
+After cloning, update:
+1. **WordPress theme header** in `style.css` (Theme Name, Theme URI, Text Domain, etc.)
+2. **Function prefix** in `functions.php` (replace `dbt` with your own prefix)
+3. **Configuration** in your Deodar function (menus, styles, supports)
 
 ### Theme Structure Example
 
@@ -76,6 +116,20 @@ add_filter('deodar', function($data) {
 - **Third-Party Integration**: Creating integrations with external services or APIs
 - **Content Management**: Building custom post types, taxonomies, or admin interfaces
 - **Business Logic**: Implementing complex business rules or data processing
+
+### Getting Started with Plugin Starter
+
+Use the plugin starter to quickly bootstrap your project:
+
+```bash
+npx degit https://github.com/brockcataldi/deodar-examples/tree/main/starters/deodar-base-plugin your-plugin-name
+```
+
+After cloning, update:
+1. **Entry point filename** (rename `deodar-base-plugin.php` to match your directory name)
+2. **WordPress plugin header** in the entry point file (Plugin Name, Plugin URI, Description, etc.)
+3. **Function prefix** in the entry point file (replace `dbp` with your own prefix)
+4. **Configuration** in your Deodar function (styles, scripts, supports)
 
 ### Plugin Structure Example
 
@@ -202,4 +256,4 @@ Once you've decided on your approach:
 
 ---
 
-Ready to start building? Choose your approach and let's create something amazing with Deodar!
+Ready to start building? Choose your approach, use one of our [starter projects](https://github.com/brockcataldi/deodar-examples), and let's create something amazing with Deodar!

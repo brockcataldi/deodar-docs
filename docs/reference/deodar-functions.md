@@ -1,3 +1,8 @@
+---
+title: Deodar Functions Reference
+description: Complete reference for all utility functions in Deodar, including array type checking, string classification, file system operations, and ACF integration helpers.
+---
+
 # deodar-functions.php
 
 **File:** `lib/deodar-functions.php`  

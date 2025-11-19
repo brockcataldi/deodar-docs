@@ -1,3 +1,8 @@
+---
+title: Deodar Models Reference
+description: Reference documentation for the Deodar models loader, which conditionally loads model classes and enums used throughout the plugin.
+---
+
 # deodar-models.php
 
 **File:** `lib/deodar-models.php`  

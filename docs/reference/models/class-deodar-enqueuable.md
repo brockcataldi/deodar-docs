@@ -1,3 +1,8 @@
+---
+title: Deodar_Enqueuable Class Reference
+description: Reference documentation for the Deodar_Enqueuable abstract base class, which provides common functionality for managing static assets in WordPress.
+---
+
 # class-deodar-enqueuable.php
 
 **File:** `lib/models/class-deodar-enqueuable.php`  

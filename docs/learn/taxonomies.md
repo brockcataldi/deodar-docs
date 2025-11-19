@@ -1,5 +1,7 @@
 ---
 sidebar_position: 7
+title: Creating Custom Taxonomies
+description: Guide to creating and managing custom taxonomies in Deodar, including registration, field groups, and taxonomy configuration.
 ---
 
 # Taxonomies

@@ -1,3 +1,8 @@
+---
+title: Deodar_Support Class Reference
+description: Reference documentation for the Deodar_Support class, which provides utilities for managing WordPress theme support features.
+---
+
 # class-deodar-support.php
 
 **File:** `lib/models/class-deodar-support.php`  

@@ -1,3 +1,8 @@
+---
+title: Deodar Main Entry Point
+description: Reference documentation for the main Deodar plugin entry point, including plugin header, constant definitions, and initialization process.
+---
+
 # deodar.php
 
 **File:** `deodar.php`  

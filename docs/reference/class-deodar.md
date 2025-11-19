@@ -1,3 +1,8 @@
+---
+title: Deodar Class Reference
+description: Complete reference documentation for the main Deodar class, including properties, methods, and usage examples for initialization, configuration, and WordPress hook registration.
+---
+
 # class-deodar.php
 
 **File:** `lib/class-deodar.php`  

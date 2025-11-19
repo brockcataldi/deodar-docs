@@ -1,5 +1,7 @@
 ---
 sidebar_position: 9
+title: Working with Non-ACF Blocks
+description: Comprehensive guide to working with non-ACF blocks in Deodar, including automatic asset loading, block variations, and styling integration.
 ---
 
 # Working with Non-ACF Blocks

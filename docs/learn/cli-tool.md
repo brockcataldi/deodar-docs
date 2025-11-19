@@ -1,5 +1,7 @@
 ---
 sidebar_position: 10
+title: Deodar CLI Tool
+description: Master the Deodar command-line interface for creating blocks, building assets, watching for changes, and managing your development workflow.
 ---
 
 # CLI Tool

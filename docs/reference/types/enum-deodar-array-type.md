@@ -1,3 +1,8 @@
+---
+title: Deodar_Array_Type Enum Reference
+description: Reference documentation for the Deodar_Array_Type enum, which defines possible types of arrays for type-safe classification in PHP.
+---
+
 # enum-deodar-array-type.php
 
 **File:** `lib/models/enum-deodar-array-type.php`  

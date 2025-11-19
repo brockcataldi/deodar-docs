@@ -1,3 +1,8 @@
+---
+title: Deodar_Customization Class Reference
+description: Reference documentation for the Deodar_Customization abstract base class, which provides foundation for WordPress customizer functionality.
+---
+
 # class-deodar-customization.php
 
 **File:** `lib/models/class-deodar-customization.php`  

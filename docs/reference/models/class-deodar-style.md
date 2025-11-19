@@ -1,3 +1,8 @@
+---
+title: Deodar_Style Class Reference
+description: Reference documentation for the Deodar_Style class, which extends Deodar_Enqueuable to provide CSS stylesheet management functionality.
+---
+
 # class-deodar-style.php
 
 **File:** `lib/models/class-deodar-style.php`  

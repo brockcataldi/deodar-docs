@@ -1,5 +1,7 @@
 ---
 sidebar_position: 4
+title: Styles and Scripts Configuration
+description: Learn how to configure and manage styles and scripts in your Deodar project, including SCSS compilation, JavaScript bundling, and asset enqueuing.
 ---
 
 # Styles and Scripts
